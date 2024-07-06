@@ -1,8 +1,14 @@
 import 'package:advance_flutter_exam/headers.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  const LoginPage({
+    super.key,
+    required this.sharedPreferences,
+    required this.isLogin,
+  });
 
+  final SharedPreferences sharedPreferences;
+  final bool isLogin;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -10,6 +16,14 @@ class LoginPage extends StatelessWidget {
       username: '',
       password: '',
     );
+
+    LoginController loginController = Get.put(
+      LoginController(
+        sharedPreferences: sharedPreferences,
+        isLogin: isLogin,
+      ),
+    );
+
     Logger logger = Logger();
     // =========================================================================
     return GestureDetector(
@@ -56,7 +70,14 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    loginController.login(user: user)
+                        ? Get.to(const HomePage())
+                        : Get.snackbar(
+                            'Error',
+                            'Username or password is incorrect',
+                          );
+                  },
                   child: const Text('Login'),
                 ),
               ),
@@ -66,7 +87,14 @@ class LoginPage extends StatelessWidget {
                 children: [
                   const Text("Don't have an account?"),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(
+                        SignupPage(
+                          sharedPreferences: sharedPreferences,
+                          isLogin: isLogin,
+                        ),
+                      );
+                    },
                     child: const Text('Register'),
                   ),
                 ],

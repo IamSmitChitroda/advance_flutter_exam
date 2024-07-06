@@ -10,10 +10,11 @@ class LoginController extends GetxController {
 
   User user = User(username: '', password: '');
 
-  void login({required User user}) {
+  bool login({required User user}) {
     this.user == user
         ? sharedPreferences.setBool('isLogin', true)
         : sharedPreferences.setBool('isLogin', false);
+    return this.user == user;
   }
 
   void signUp({required User user}) {

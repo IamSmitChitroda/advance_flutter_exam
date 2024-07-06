@@ -1,5 +1,6 @@
 import 'package:advance_flutter_exam/controller/login_controoler.dart';
 import 'package:advance_flutter_exam/headers.dart';
+import 'package:advance_flutter_exam/pages/login_page/login_page.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({
@@ -67,7 +68,16 @@ class SignupPage extends StatelessWidget {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    loginController.signUp(user: user);
+                    Get.to(
+                      LoginPage(
+                        sharedPreferences: sharedPreferences,
+                        isLogin: isLogin,
+                      ),
+                    );
+                    // Get.toNamed(Routes.loginPage);
+                  },
                   child: const Text('Sign up'),
                 ),
               ),
@@ -77,7 +87,9 @@ class SignupPage extends StatelessWidget {
                 children: [
                   const Text("Already have an account?"),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                     child: const Text('Login'),
                   ),
                 ],

@@ -1,4 +1,5 @@
 import 'package:advance_flutter_exam/headers.dart';
+import 'package:advance_flutter_exam/pages/login_page/login_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.brown,
         // colorSchemeSeed: const Color(0xff464447),
       ),
-      initialRoute: Routes.loginPage,
-      getPages: Routes.routes,
+      home: LoginPage(sharedPreferences: sharedPreferences, isLogin: isLogin),
+      // initialRoute: Routes.loginPage,
+      // getPages: Routes.routes,
     );
   }
 }
